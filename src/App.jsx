@@ -49,7 +49,11 @@ function App() {
 
   return (
     <div className="app">
-      <Outlet context={{ handleLogin, handleCreateAccount }} />
+      <div className="background-image"></div>
+      <Outlet
+        className="content"
+        context={{ handleLogin, handleCreateAccount }}
+      />
     </div>
   );
 }
