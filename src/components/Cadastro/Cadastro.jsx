@@ -3,17 +3,23 @@ import "./Cadastro.css";
 import { useState } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-const Cadastro = ({ handleCreateAccount }) => {
+const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const navigate = useNavigate();
-
+  const { handleCreateAccount } = useOutletContext();
   return (
     <div className="container">
-      <form onSubmit={() => handleCreateAccount(email, senha, confirmarSenha)}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); // Previne o comportamento padrão do form
+          handleCreateAccount(email, senha, confirmarSenha);
+        }}
+      >
         <h1>Cadastro</h1>
         <div>
           <Input

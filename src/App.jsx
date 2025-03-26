@@ -1,8 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import "./App.css";
 import Cadastro from "./components/Cadastro/Cadastro";
 import Login from "./components/Login/Login";
+import AppRoutes from "./Routes.jsx";
+import { useNavigate, Outlet } from "react-router-dom";
+
 import { useState } from "react";
+
 function App() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
@@ -46,10 +49,7 @@ function App() {
 
   return (
     <div className="app">
-      <AppRoutes
-        handleLogin={handleLogin}
-        handleCreateAccount={handleCreateAccount}
-      />
+      <Outlet context={{ handleLogin, handleCreateAccount }} />
     </div>
   );
 }

@@ -3,16 +3,22 @@ import { useState } from "react";
 import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
+  const { handleLogin } = useOutletContext();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
 
   return (
     <div className="container">
-      <form onSubmit={() => handleLogin(email, senha)}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault(); // Previne o comportamento padrão do form
+          handleLogin(email, senha);
+        }}
+      >
         <h1>Login</h1>
         <div>
           <Input
