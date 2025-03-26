@@ -1,36 +1,40 @@
 import { User, Lock } from "lucide-react";
-
+import { useState } from "react";
 import "./Login.css";
+import Button from "../Button/Button";
+import Input from "../Input/Input";
 
-const Login = ({ onSwitch, props, handleSubmit }) => {
-  console.log(props);
-
+const Login = ({ onSwitch, handleLogin }) => {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => handleLogin(email, senha)}>
         <h1>Login</h1>
         <div>
-          <input
+          <Input
             required
             type="email"
+            value={email}
             placeholder="E-mail"
-            onChange={(e) => props.setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <User className="icon" />
         </div>
         <div>
-          <input
+          <Input
             required
             type="password"
+            value={senha}
             placeholder="Senha"
-            onChange={(e) => props.setSenha(e.target.value)}
+            onChange={(e) => setSenha(e.target.value)}
           />
           <Lock className="icon" />
         </div>
 
         <div className="recall-forget">
           <label>
-            <input type="checkbox" />
+            <Input type="checkbox" />
             Lembre de mim
           </label>
           <a href="#" className="links">
@@ -46,7 +50,7 @@ const Login = ({ onSwitch, props, handleSubmit }) => {
           </p>
         </div>
 
-        <button>Entrar</button>
+        <Button type="submit">Entrar</Button>
       </form>
     </div>
   );

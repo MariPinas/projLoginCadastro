@@ -4,53 +4,56 @@ import Login from "./components/Login/Login";
 import { useState } from "react";
 function App() {
   const [isLogin, setIsLogin] = useState(true);
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      email: "",
-      senha: "",
-    },
-  ]);
-  const [confirmSenha, setConfirmSenha] = useState("");
+  const [users, setUsers] = useState([]);
 
   function handleToggle() {
     setIsLogin(!isLogin);
   }
 
-  function handleSubmit() {
-    alert(`Enviando os dados: ${users.email} e ${users.senha}`);
-  }
   function handleCreateAccount(email, senha, confirmarSenha) {
-    if (email != null || senha != null || confirmarSenha != null) {
-      if (senha.match(confirmarSenha)) {
+    if (email && senha && confirmarSenha) {
+      if (senha === confirmarSenha) {
         const newUser = {
-          id: users.length + 2,
+          id: users.length + 1,
           email,
           senha,
         };
         setUsers([...users, newUser]);
+        const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+        localStorage.setItem(
+          "users",
+          JSON.stringify([...storedUsers, newUser])
+        );
 
         alert("Sua conta foi criada! Clique em OK para prosseguir");
         return handleToggle();
-      }
-      return alert("As senhas nao coincidem");
-    }
-    return alert("Preencha todos os campos ne bebe");
+      } else alert("As senhas não coincidem");
+    } else alert("Preencha todos os campos, por favor!");
   }
+
+  function handleLogin(email, senha) {
+    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+    const userExists = storedUsers.find(
+      (users) => users.email === email && users.senha === senha
+    );
+    console.log("lista users", users);
+    console.log("usuario encontrado", userExists);
+    if (userExists) {
+      alert("Login realizado com sucesso!");
+    } else {
+      alert("Email ou senha incorretos");
+    }
+  }
+
   return (
     <div className="app">
       {isLogin ? (
-        <Login
-          onSwitch={handleToggle}
-          users={users}
-          handleSubmit={handleSubmit}
-        />
+        <Login onSwitch={handleToggle} handleLogin={handleLogin} />
       ) : (
         <Cadastro
           onSwitch={handleToggle}
           handleCreateAccount={handleCreateAccount}
-          users={users}
-          confirmSenha={confirmSenha}
         />
       )}
     </div>
