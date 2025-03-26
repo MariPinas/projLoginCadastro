@@ -1,14 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import Cadastro from "./components/Cadastro/Cadastro";
 import Login from "./components/Login/Login";
 import { useState } from "react";
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
   const [users, setUsers] = useState([]);
-
-  function handleToggle() {
-    setIsLogin(!isLogin);
-  }
+  const navigate = useNavigate();
 
   function handleCreateAccount(email, senha, confirmarSenha) {
     if (email && senha && confirmarSenha) {
@@ -26,7 +23,7 @@ function App() {
         );
 
         alert("Sua conta foi criada! Clique em OK para prosseguir");
-        return handleToggle();
+        navigate("/");
       } else alert("As senhas não coincidem");
     } else alert("Preencha todos os campos, por favor!");
   }
@@ -41,6 +38,7 @@ function App() {
     console.log("usuario encontrado", userExists);
     if (userExists) {
       alert("Login realizado com sucesso!");
+      navigate("/home");
     } else {
       alert("Email ou senha incorretos");
     }
@@ -48,14 +46,10 @@ function App() {
 
   return (
     <div className="app">
-      {isLogin ? (
-        <Login onSwitch={handleToggle} handleLogin={handleLogin} />
-      ) : (
-        <Cadastro
-          onSwitch={handleToggle}
-          handleCreateAccount={handleCreateAccount}
-        />
-      )}
+      <AppRoutes
+        handleLogin={handleLogin}
+        handleCreateAccount={handleCreateAccount}
+      />
     </div>
   );
 }

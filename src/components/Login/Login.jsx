@@ -3,10 +3,13 @@ import { useState } from "react";
 import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({ onSwitch, handleLogin }) => {
+const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <form onSubmit={() => handleLogin(email, senha)}>
@@ -44,7 +47,7 @@ const Login = ({ onSwitch, handleLogin }) => {
         <div>
           <p>
             Nao tem conta?
-            <a href="#" className="links" onClick={onSwitch}>
+            <a href="#" className="links" onClick={() => navigate("/cadastro")}>
               Cadastre-se
             </a>
           </p>

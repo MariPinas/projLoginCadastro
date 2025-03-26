@@ -3,12 +3,14 @@ import "./Cadastro.css";
 import { useState } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
-const Cadastro = ({ handleCreateAccount, onSwitch }) => {
+const Cadastro = ({ handleCreateAccount }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
-  console.log(email, senha, confirmarSenha);
+  const navigate = useNavigate();
+
   return (
     <div className="container">
       <form onSubmit={() => handleCreateAccount(email, senha, confirmarSenha)}>
@@ -46,7 +48,7 @@ const Cadastro = ({ handleCreateAccount, onSwitch }) => {
         <div>
           <p>
             Ja possui conta?
-            <a href="#" className="links" onClick={onSwitch}>
+            <a href="#" className="links" onClick={() => navigate("/")}>
               Entrar
             </a>
           </p>
