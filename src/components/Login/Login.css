@@ -1,0 +1,73 @@
+.login-container {
+  width: 50vh;
+  height: 60vh;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.login-container h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.lembrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.caixinha {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e2eff8;
+  background-color: transparent;
+  position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.caixinha:checked::after {
+  content: "X";
+  position: absolute;
+  left: 15%;
+  font-size: 16px;
+  color: #5baafa;
+  font-weight: 600;
+}
+
+.caixinha:checked {
+  background-color: #e2eff8;
+  border-color: #e2eff8;
+}
+
+.label {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: 800;
+}
+.container {
+  width: 60vh;
+  height: 60vh;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}

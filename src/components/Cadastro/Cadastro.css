@@ -1,0 +1,25 @@
+.cadastro-container {
+  width: 50vh;
+  height: 60vh;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.cadastro-container h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cadastro-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.2rem;
+}

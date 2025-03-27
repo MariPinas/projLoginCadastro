@@ -4,6 +4,9 @@ import "./Login.css";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import TextBox from "../TextBox/TextBox";
+import InputContainer from "../InputContainer/InputContainer";
+import InputWrapper from "../InputWrapper/InputWrapper";
 
 const Login = () => {
   const { handleLogin } = useOutletContext();
@@ -12,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className="login-container">
       <form
         onSubmit={(e) => {
           e.preventDefault(); // Previne o comportamento padrão do form
@@ -20,46 +23,67 @@ const Login = () => {
         }}
       >
         <h1>Login</h1>
-        <div>
-          <Input
-            required
-            type="email"
-            value={email}
-            placeholder="E-mail"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <User className="icon" />
-        </div>
-        <div>
-          <Input
-            required
-            type="password"
-            value={senha}
-            placeholder="Senha"
-            onChange={(e) => setSenha(e.target.value)}
-          />
-          <Lock className="icon" />
-        </div>
+        <InputContainer>
+          <InputWrapper icon={User}>
+            <Input
+              required
+              type="email"
+              value={email}
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </InputWrapper>
 
-        <div className="recall-forget">
-          <label>
-            <Input type="checkbox" />
+          <InputWrapper icon={Lock}>
+            <Input
+              required
+              type="password"
+              value={senha}
+              placeholder="Senha"
+              onChange={(e) => setSenha(e.target.value)}
+            />
+          </InputWrapper>
+          <TextBox linkText={"Esqueci a senha"} />
+        </InputContainer>
+
+        {/* <div className="input-container">
+          <div className="input-wrapper">
+            <Input
+              required
+              type="email"
+              value={email}
+              placeholder="E-mail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <User className="icon" />
+          </div>
+
+          <div className="input-wrapper">
+            <Input
+              required
+              type="password"
+              value={senha}
+              placeholder="Senha"
+              onChange={(e) => setSenha(e.target.value)}
+            />
+            <Lock className="icon" />
+          </div>
+          <TextBox linkText={"Esqueci a senha"} />
+        </div> */}
+
+        <div className="lembrar">
+          <input className="caixinha" type="checkbox" />
+          <label htmlFor="#" className="label">
             Lembre de mim
           </label>
-          <a href="#" className="links">
-            Esqueci a Senha
-          </a>
         </div>
-        <div>
-          <p>
-            Nao tem conta?
-            <a href="#" className="links" onClick={() => navigate("/cadastro")}>
-              Cadastre-se
-            </a>
-          </p>
-        </div>
-
         <Button type="submit">Entrar</Button>
+
+        <TextBox
+          text={"Nao possui conta?"}
+          linkText={"Cadastrar"}
+          onClick={() => navigate("/cadastro")}
+        />
       </form>
     </div>
   );
