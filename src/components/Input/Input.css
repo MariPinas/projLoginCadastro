@@ -19,3 +19,9 @@
   color: #a9a9a9;
   font-size: 1.5rem;
 }
+
+.input:hover {
+  box-shadow: 0 0 8px rgba(64, 158, 255, 0.5);
+  border-color: #1e90ff;
+  transition: all 0.5s ease;
+}
